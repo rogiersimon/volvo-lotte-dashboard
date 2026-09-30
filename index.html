@@ -138,11 +138,11 @@ td{padding:9px 10px;border-bottom:1px solid var(--line);} td.r,th.r{text-align:r
 // (a) ticketsDone/inProgress per blok, (b) log-regel {date,hours,tokens},
 // (c) plannedEnd (streefdatum) en (d) notes. Claude Code kan dit dagelijks doen.
 const DATA = {
-  project:"Volvo Lotte — Scope 1", updated:"2026-09-27",
+  project:"Volvo Lotte — Scope 1", updated:"2026-09-30",
   totalHoursEstimate:1648, plannedEnd:"",
   costPerMln:3,   // € per miljoen tokens (indicatieve API-equivalent; pas aan naar je model/tarief)
   blocks:[
-    { name:"Fundament & kern",     ticketsTotal:18, hoursEst:632, ticketsDone:0, inProgress:0 },
+    { name:"Fundament & kern",     ticketsTotal:18, hoursEst:632, ticketsDone:4, inProgress:0 },
     { name:"Werkplaats",           ticketsTotal:11, hoursEst:492, ticketsDone:0, inProgress:0 },
     { name:"Voorraad",             ticketsTotal:6,  hoursEst:204, ticketsDone:0, inProgress:0 },
     { name:"Dashboards & inzicht", ticketsTotal:1,  hoursEst:64,  ticketsDone:0, inProgress:0 },
@@ -150,11 +150,15 @@ const DATA = {
   ],
   notes:[
     "VWE Interdata/XMLmode-toegang aanvragen op het account (heeft doorlooptijd).",
-    "Hosting-keuze bevestigen: managed vs. self-host (Supabase + Budibase/Appsmith + n8n).",
-    "Streefdatum vaststellen zodra de bouw start, zodat 'op schema' zichtbaar wordt."
+    "DPA met Appsmith afsluiten (operationeel, zie docs/actiepunten.md in de platform-repo).",
+    "Uitgesteld naar FND-06: upload-test als ingelogde gebruiker en tokenlevensduur op prod; naar FND-07: bereikbaarheid vanuit n8n.",
+    "Topbalk is op mobiel te vol: oppakken bij de eerste echte pagina (Sjabloon + alle gekloonde pagina's).",
+    "Streefdatum vaststellen, zodat 'op schema' zichtbaar wordt."
   ],
   // log-regel: { date, hours, tokens, tickets } — 'tickets' = cumulatief afgerond aantal die dag (voor velocity)
-  log:[ /* { date:"2026-09-29", hours:6, tokens:1200000, tickets:1 } */ ]
+  log:[
+    { date:"2026-09-30", hours:14, tokens:85227850, tickets:4 }
+  ]
 };
 // ================= VOORBEELDDATA (illustratie) =================
 const DEMO = {
