@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Volvo Lotte — Bouwvoortgang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#202A44; --navy:#1B365D; --mid:#34567F; --steel:#7089AC; --light:#CED9E5;
+  --bg:#EEF2F7; --card:#FFFFFF; --line:#DCE4EE; --txt:#243242; --mute:#6B7A8B;
+  --green:#2E7D46; --amber:#C08A2E; --red:#B23A3A;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:"Rubik","Segoe UI",system-ui,-apple-system,sans-serif;}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px 60px;}
+.top{background:var(--ink);color:#fff;}
+.top .inner{max-width:1120px;margin:0 auto;padding:18px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.brand b{font-size:22px;font-weight:700;letter-spacing:2px;}
+.brand span{display:block;font-size:11px;letter-spacing:3px;color:var(--steel);font-weight:600;margin-top:2px;}
+.top h1{font-size:15px;font-weight:500;color:#C7D4E4;margin:0 0 0 8px;}
+.top .right{margin-left:auto;display:flex;align-items:center;gap:14px;}
+.upd{font-size:12px;color:#9fb2cc;text-align:right;}
+.upd b{color:#fff;font-weight:600;}
+.upd .stale{color:#F0C766;font-weight:600;display:block;margin-top:2px;}
+.btn{background:transparent;border:1.5px solid var(--steel);color:#dbe6f2;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}
+.btn:hover{background:rgba(255,255,255,.08)}
+.btn.on{background:var(--steel);color:#fff;border-color:var(--steel)}
+.demobar{background:#F6EBD4;color:#7a5a12;font-size:12.5px;font-weight:600;text-align:center;padding:7px;display:none;}
+.demobar.show{display:block}
+/* status strip */
+.strip{margin-top:22px;border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;color:#fff;}
+.strip .dot{width:12px;height:12px;border-radius:50%;background:#fff;opacity:.9;flex:0 0 auto}
+.strip .lab{font-size:16px;font-weight:700;}
+.strip .det{margin-left:auto;font-size:13px;opacity:.95}
+.s-green{background:var(--green)} .s-amber{background:var(--amber)} .s-red{background:var(--red)} .s-grey{background:var(--steel)}
+/* kpi */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:16px;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 1px 2px rgba(20,40,70,.04);}
+.kpi h3{margin:0 0 6px;font-size:12px;font-weight:600;color:var(--mute);}
+.kpi .big{font-size:30px;font-weight:700;color:var(--navy);line-height:1.1;}
+.kpi .sub{font-size:12px;color:var(--mute);margin-top:6px;}
+.ring{display:flex;align-items:center;gap:12px;}
+h2{font-size:16px;color:var(--navy);font-weight:700;margin:30px 0 12px;}
+/* blocks */
+.legend{font-size:12px;color:var(--mute);margin:0 0 10px;display:flex;gap:16px;flex-wrap:wrap}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.blk{display:flex;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);}
+.blk:last-child{border-bottom:none}
+.blk .nm{width:200px;font-weight:600;font-size:14px;color:var(--ink);flex:0 0 auto;}
+.bar{flex:1;position:relative;height:16px;border-radius:8px;background:var(--light);overflow:hidden;}
+.bar span{position:absolute;top:0;height:100%}
+.s-done{left:0;background:var(--navy)} .s-wip{background:var(--steel)}
+.blk .ct{width:96px;text-align:right;font-size:13px;color:var(--navy);font-weight:600;flex:0 0 auto;}
+.blk .hr{width:96px;text-align:right;font-size:12px;color:var(--mute);flex:0 0 auto;}
+/* forecast + notes */
+.fc{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.fc .big{font-size:22px}
+.notes li{margin:0 0 8px;list-style:none;padding-left:20px;position:relative;font-size:13.5px;color:var(--txt)}
+.notes li:before{content:"";position:absolute;left:0;top:6px;width:9px;height:9px;border-radius:50%;background:var(--amber)}
+.notes{margin:0;padding:0}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{text-align:left;color:var(--mute);font-weight:600;font-size:12px;padding:8px 10px;border-bottom:2px solid var(--line);}
+td{padding:9px 10px;border-bottom:1px solid var(--line);} td.r,th.r{text-align:right}
+.muted{color:var(--mute);font-size:12.5px}
+.foot{margin-top:26px;color:var(--mute);font-size:12px;line-height:1.6}
+.empty{color:var(--mute);font-style:italic;padding:16px 0}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.fc{grid-template-columns:1fr 1fr}.blk .hr{display:none}}
+</style>
+</head>
+<body>
+<div class="top"><div class="inner">
+  <div class="brand"><b>VOLVO LOTTE</b><span>KLASSISKA SVENSKA IKONER</span></div>
+  <h1>Bouwvoortgang — Platform (Scope 1)</h1>
+  <div class="right">
+    <div class="upd">Laatste update<br><b id="updated">—</b><span class="stale" id="stale"></span></div>
+    <button class="btn" id="demoBtn">Voorbeelddata</button>
+  </div>
+</div></div>
+<div class="demobar" id="demobar">VOORBEELDDATA — illustratie, niet de echte voortgang. Klik nogmaals op “Voorbeelddata” voor de live cijfers.</div>
+
+<div class="wrap">
+  <div class="strip s-grey" id="strip">
+    <span class="dot"></span><span class="lab" id="stripLab">Status</span>
+    <span class="det" id="stripDet"></span>
+  </div>
+
+  <div class="kpis">
+    <div class="card kpi"><h3>Voltooid</h3>
+      <div class="ring"><svg width="86" height="86" viewBox="0 0 86 86">
+        <circle cx="43" cy="43" r="34" fill="none" stroke="#E3EAF2" stroke-width="10"/>
+        <circle id="ring" cx="43" cy="43" r="34" fill="none" stroke="#1B365D" stroke-width="10" stroke-linecap="round" transform="rotate(-90 43 43)" stroke-dasharray="213.6" stroke-dashoffset="213.6"/>
+        <text id="ringpct" x="43" y="49" text-anchor="middle" font-size="20" font-weight="700" fill="#1B365D">0%</text>
+      </svg><div class="sub" id="pctSub">van de tickets</div></div>
+    </div>
+    <div class="card kpi"><h3>Tickets</h3><div class="big" id="tk">0</div><div class="sub" id="tkSub">van 0 · 0 in uitvoering</div></div>
+    <div class="card kpi"><h3>Uren besteed</h3><div class="big" id="hr">0</div><div class="sub" id="hrSub">van 0 u geschat</div></div>
+    <div class="card kpi"><h3>Tokens besteed</h3><div class="big" id="tok">0</div><div class="sub" id="tokSub">≈ € 0 · API-equivalent</div></div>
+    <div class="card kpi"><h3>Verwachte oplevering</h3><div class="big" id="eta" style="font-size:20px">n.n.b.</div><div class="sub" id="etaSub">meer data nodig</div></div>
+  </div>
+
+  <h2>Voortgang per bouwblok</h2>
+  <div class="legend"><span><i style="background:#1B365D"></i>Klaar</span><span><i style="background:#7089AC"></i>In uitvoering</span><span><i style="background:#CED9E5"></i>Te doen</span></div>
+  <div class="card" id="blocks"></div>
+
+  <h2 id="notesH">Aandachtspunten & risico's</h2>
+  <div class="card" id="notesCard"><ul class="notes" id="notes"></ul></div>
+
+  <h2>Voortgang over tijd</h2>
+  <div class="card"><div id="chart"></div></div>
+
+  <h2>Velocity — tickets per week</h2>
+  <div class="card">
+    <div class="muted" id="velStat" style="margin-bottom:8px"></div>
+    <div id="vchart"></div>
+    <div class="muted" style="margin-top:8px">Velocity is een activiteitssignaal (loopt het werk door?). Het is bewust géén tweede prognose — tickets verschillen sterk in omvang, dus de opleverdatum blijft op uren gebaseerd.</div>
+  </div>
+
+  <h2>Prognose</h2>
+  <div class="card fc">
+    <div><h3 class="muted">Verwachte opleverdatum</h3><div class="big" id="f_date" style="color:var(--navy);font-weight:700">n.n.b.</div></div>
+    <div><h3 class="muted">Streefdatum</h3><div class="big" id="f_plan" style="color:var(--navy);font-weight:700">—</div></div>
+    <div><h3 class="muted">Gem. uren / dag</h3><div class="big" id="f_rate" style="color:var(--navy);font-weight:700">—</div></div>
+    <div><h3 class="muted">Resterend</h3><div class="big" id="f_rem" style="color:var(--navy);font-weight:700">—</div></div>
+  </div>
+  <p class="muted" id="f_note" style="margin-top:10px">Prognose op basis van de historische gemiddelde urenbesteding (uren tot nu ÷ verstreken kalenderdagen) en de nog benodigde uren. Indicatief; beweegt mee met het werkelijke tempo.</p>
+
+  <h2>Recente updates</h2>
+  <div class="card"><div id="log"></div></div>
+
+  <div class="foot" id="foot"></div>
+</div>
+
+<script>
+// ================= DATA — dagelijks bijwerken =================
+// (a) ticketsDone/inProgress per blok, (b) log-regel {date,hours,tokens},
+// (c) plannedEnd (streefdatum) en (d) notes. Claude Code kan dit dagelijks doen.
+const DATA = {
+  project:"Volvo Lotte — Scope 1", updated:"2026-09-27",
+  totalHoursEstimate:1648, plannedEnd:"",
+  costPerMln:3,   // € per miljoen tokens (indicatieve API-equivalent; pas aan naar je model/tarief)
+  blocks:[
+    { name:"Fundament & kern",     ticketsTotal:18, hoursEst:632, ticketsDone:0, inProgress:0 },
+    { name:"Werkplaats",           ticketsTotal:11, hoursEst:492, ticketsDone:0, inProgress:0 },
+    { name:"Voorraad",             ticketsTotal:6,  hoursEst:204, ticketsDone:0, inProgress:0 },
+    { name:"Dashboards & inzicht", ticketsTotal:1,  hoursEst:64,  ticketsDone:0, inProgress:0 },
+    { name:"Data & oplevering",    ticketsTotal:6,  hoursEst:256, ticketsDone:0, inProgress:0 }
+  ],
+  notes:[
+    "VWE Interdata/XMLmode-toegang aanvragen op het account (heeft doorlooptijd).",
+    "Hosting-keuze bevestigen: managed vs. self-host (Supabase + Budibase/Appsmith + n8n).",
+    "Streefdatum vaststellen zodra de bouw start, zodat 'op schema' zichtbaar wordt."
+  ],
+  // log-regel: { date, hours, tokens, tickets } — 'tickets' = cumulatief afgerond aantal die dag (voor velocity)
+  log:[ /* { date:"2026-09-29", hours:6, tokens:1200000, tickets:1 } */ ]
+};
+// ================= VOORBEELDDATA (illustratie) =================
+const DEMO = {
+  project:"Volvo Lotte — Scope 1", updated:"2026-10-24",
+  totalHoursEstimate:1648, plannedEnd:"2027-10-31", costPerMln:3,
+  blocks:[
+    { name:"Fundament & kern",     ticketsTotal:18, hoursEst:632, ticketsDone:12, inProgress:3 },
+    { name:"Werkplaats",           ticketsTotal:11, hoursEst:492, ticketsDone:3,  inProgress:2 },
+    { name:"Voorraad",             ticketsTotal:6,  hoursEst:204, ticketsDone:0,  inProgress:0 },
+    { name:"Dashboards & inzicht", ticketsTotal:1,  hoursEst:64,  ticketsDone:0,  inProgress:0 },
+    { name:"Data & oplevering",    ticketsTotal:6,  hoursEst:256, ticketsDone:1,  inProgress:1 }
+  ],
+  notes:[
+    "Wacht op levering originele onderdelen — blokkeert 1 werkorder-testcase.",
+    "VWE-koppeling: eerst met mock gebouwd; live credentials volgen deze week."
+  ],
+  log:(function(){ const a=[]; const start=new Date("2026-09-29");
+    const hrs=[6,5,7,4,6,0,0,6,7,5,6,4,0,0,7,6,5,6,7,0,0,6];
+    for(let i=0;i<hrs.length;i++){ const d=new Date(start); d.setDate(start.getDate()+i);
+      if(hrs[i]>0){ const tok=hrs[i]*220000+Math.round(Math.random()*120000);
+        a.push({date:d.toISOString().slice(0,10),hours:hrs[i],tokens:tok}); } }
+    a.forEach((e,j)=>{ e.tickets=Math.round((j+1)/a.length*16); }); // cumulatief -> 16 gereed
+    return a; })()
+};
+
+let showingDemo=false;
+const fmtInt=n=>n.toLocaleString('nl-NL');
+function fmtTok(n){ if(n>=1e9)return (n/1e9).toLocaleString('nl-NL',{maximumFractionDigits:1})+' mld';
+  if(n>=1e6)return (n/1e6).toLocaleString('nl-NL',{maximumFractionDigits:1})+' mln';
+  if(n>=1e3)return Math.round(n/1e3).toLocaleString('nl-NL')+'k'; return fmtInt(n); }
+const fmtDate=d=>d.toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'});
+const parse=s=>new Date(s+"T00:00:00");
+const today=()=>{const d=new Date();d.setHours(0,0,0,0);return d;};
+
+function render(D){
+  document.getElementById('updated').textContent=D.updated||'—';
+  // freshness
+  const st=document.getElementById('stale'); st.textContent='';
+  if(D.updated){ const days=Math.round((today()-parse(D.updated))/864e5);
+    if(days>=3) st.textContent='⚠ '+days+' dagen niet bijgewerkt'; }
+  const tTot=D.blocks.reduce((s,b)=>s+b.ticketsTotal,0);
+  const tDone=D.blocks.reduce((s,b)=>s+b.ticketsDone,0);
+  const tWip=D.blocks.reduce((s,b)=>s+(b.inProgress||0),0);
+  const pct=tTot?tDone/tTot:0;
+  const C=2*Math.PI*34, ring=document.getElementById('ring');
+  ring.setAttribute('stroke-dasharray',C.toFixed(1));
+  ring.setAttribute('stroke-dashoffset',(C*(1-pct)).toFixed(1));
+  document.getElementById('ringpct').textContent=Math.round(pct*100)+'%';
+  document.getElementById('pctSub').textContent='van '+tTot+' tickets';
+  document.getElementById('tk').textContent=tDone;
+  document.getElementById('tkSub').textContent='van '+tTot+' · '+tWip+' in uitvoering';
+  const hSpent=D.log.reduce((s,e)=>s+(e.hours||0),0);
+  document.getElementById('hr').textContent=fmtInt(hSpent);
+  const hpct=D.totalHoursEstimate?Math.round(hSpent/D.totalHoursEstimate*100):0;
+  document.getElementById('hrSub').textContent='van '+fmtInt(D.totalHoursEstimate)+' u geschat ('+hpct+'%)';
+  const tok=D.log.reduce((s,e)=>s+(e.tokens||0),0);
+  document.getElementById('tok').textContent=fmtTok(tok);
+  const cost=tok/1e6*(D.costPerMln||0);
+  document.getElementById('tokSub').textContent='≈ € '+Math.round(cost).toLocaleString('nl-NL')+' · API-equivalent';
+  // blocks (3-segment)
+  const bl=document.getElementById('blocks'); bl.innerHTML='';
+  D.blocks.forEach(b=>{ const dp=b.ticketsTotal?b.ticketsDone/b.ticketsTotal*100:0;
+    const wp=b.ticketsTotal?(b.inProgress||0)/b.ticketsTotal*100:0;
+    const row=document.createElement('div'); row.className='blk';
+    row.innerHTML='<div class="nm">'+b.name+'</div>'+
+      '<div class="bar"><span class="s-done" style="width:'+dp+'%"></span>'+
+      '<span class="s-wip" style="left:'+dp+'%;width:'+wp+'%"></span></div>'+
+      '<div class="ct">'+b.ticketsDone+' / '+b.ticketsTotal+'</div>'+
+      '<div class="hr">'+((b.inProgress||0)>0?b.inProgress+' bezig':'~'+b.hoursEst+' u')+'</div>';
+    bl.appendChild(row); });
+  // forecast
+  let etaDate=null, rate='—', rem='—', etaText='n.n.b.', etaSub='meer data nodig';
+  if(hSpent>0 && D.log.length>0){
+    const first=parse(D.log[0].date), last=parse(D.log[D.log.length-1].date);
+    const elapsed=Math.max(1,Math.round((last-first)/864e5)+1);
+    const perDay=hSpent/elapsed, remH=Math.max(0,D.totalHoursEstimate-hSpent);
+    const remDays=perDay>0?Math.ceil(remH/perDay):null;
+    rate=perDay.toLocaleString('nl-NL',{maximumFractionDigits:1})+' u';
+    rem=fmtInt(Math.round(remH))+' u · '+(remDays!==null?remDays+' d':'—');
+    if(remDays!==null){ etaDate=new Date(today()); etaDate.setDate(etaDate.getDate()+remDays);
+      etaText=fmtDate(etaDate); etaSub='op huidig tempo'; }
+  }
+  document.getElementById('eta').textContent=etaText;
+  document.getElementById('etaSub').textContent=etaSub;
+  document.getElementById('f_date').textContent=etaText;
+  document.getElementById('f_rate').textContent=rate;
+  document.getElementById('f_rem').textContent=rem;
+  const planD=D.plannedEnd?parse(D.plannedEnd):null;
+  document.getElementById('f_plan').textContent=planD?fmtDate(planD):'niet gezet';
+  // status strip
+  const strip=document.getElementById('strip'), lab=document.getElementById('stripLab'), det=document.getElementById('stripDet');
+  strip.className='strip';
+  if(!etaDate || !planD){ strip.classList.add('s-grey');
+    lab.textContent = tDone===0 && hSpent===0 ? 'Bouw nog niet gestart' : 'Status: meer data nodig';
+    det.textContent = !planD ? 'Stel een streefdatum in om "op schema" te tonen.' : 'Voeg voortgang toe voor een prognose.';
+  } else { const diff=Math.round((etaDate-planD)/864e5);
+    let cls,txt; if(diff<=0){cls='s-green';txt='Op schema';}
+    else if(diff<=14){cls='s-amber';txt='Licht achter op schema';}
+    else{cls='s-red';txt='Achter op schema';}
+    strip.classList.add(cls); lab.textContent=txt;
+    det.textContent='Verwachte oplevering '+fmtDate(etaDate)+'  ·  streefdatum '+fmtDate(planD)+
+      (diff>0?'  ·  '+diff+' dagen later':'  ·  '+Math.abs(diff)+' dagen speling');
+  }
+  // notes
+  const nu=document.getElementById('notes');
+  const nH=document.getElementById('notesH'), nC=document.getElementById('notesCard');
+  if(D.notes && D.notes.length){ nH.style.display=''; nC.style.display='';
+    nu.innerHTML=D.notes.map(n=>'<li>'+n+'</li>').join(''); }
+  else { nH.style.display='none'; nC.style.display='none'; }
+  drawChart(D);
+  drawVelocity(D);
+  // log
+  const lg=document.getElementById('log');
+  if(D.log.length===0){ lg.innerHTML='<div class="empty">Nog geen updates. Voeg dagelijks een regel toe (datum, uren, tokens) om de voortgang en prognose te vullen.</div>'; }
+  else{ const cum={}; let cc=0; D.log.forEach(e=>{cc+=e.hours; cum[e.date]=cc;});
+    let h='<table><tr><th>Datum</th><th class="r">Uren</th><th class="r">Tokens</th><th class="r">Cumulatief (u)</th></tr>';
+    D.log.slice().reverse().slice(0,12).forEach(e=>{ h+='<tr><td>'+fmtDate(parse(e.date))+'</td><td class="r">'+e.hours+'</td><td class="r">'+fmtTok(e.tokens)+'</td><td class="r">'+cum[e.date]+'</td></tr>'; });
+    lg.innerHTML=h+'</table>'; }
+  document.getElementById('foot').innerHTML='Bijwerken: per blok "gereed"/"in uitvoering", en dagelijks één logregel { datum, uren, tokens, tickets (cumulatief gereed) }; zet een streefdatum. '+
+    'Tokenkosten zijn een indicatieve API-equivalent (op een abonnement inbegrepen), o.b.v. € '+(D.costPerMln||0)+'/mln tokens — aanpasbaar via "costPerMln" in het DATA-blok. '+
+    'Prognose is indicatief. · Volvo Lotte — Scope 1 (42 tickets, ~206 ontwikkeldagen).';
+}
+
+function weekStart(d){ const x=new Date(d); const day=(x.getDay()+6)%7; x.setDate(x.getDate()-day); x.setHours(0,0,0,0); return x; }
+function drawVelocity(D){
+  const el=document.getElementById('vchart'), stat=document.getElementById('velStat');
+  const ent=D.log.filter(e=>typeof e.tickets==='number').map(e=>({d:parse(e.date),c:e.tickets}));
+  if(ent.length<1){ stat.textContent=''; el.innerHTML='<div class="empty">Verschijnt zodra je per dag het cumulatieve aantal gereed (\'tickets\') meelogt.</div>'; return; }
+  // group by week -> last cumulative in that week
+  const wk={};
+  ent.forEach(p=>{ const k=weekStart(p.d).getTime(); if(!(k in wk)||p.c>wk[k]) wk[k]=p.c; });
+  const keys=Object.keys(wk).map(Number).sort((a,b)=>a-b);
+  const weeks=keys.map((k,i)=>({start:new Date(k), closed:Math.max(0, wk[k]-(i>0?wk[keys[i-1]]:0))}));
+  const totalDone=wk[keys[keys.length-1]];
+  const avg=totalDone/weeks.length;
+  stat.innerHTML='Gemiddeld <b style="color:var(--navy)">'+avg.toLocaleString('nl-NL',{maximumFractionDigits:1})+' tickets/week</b> · '+totalDone+' gereed over '+weeks.length+' '+(weeks.length===1?'week':'weken');
+  const W=1040,H=170,pad=34, n=weeks.length, maxV=Math.max(1,...weeks.map(w=>w.closed));
+  const bw=Math.min(70,(W-pad-20)/n-14);
+  let s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="170" font-family="Rubik,sans-serif">';
+  s+='<line x1="'+pad+'" y1="'+(H-pad)+'" x2="'+(W-20)+'" y2="'+(H-pad)+'" stroke="#D6DEE8"/>';
+  weeks.forEach((w,i)=>{ const x=pad+16+i*((W-pad-30)/n); const h=(w.closed/maxV)*(H-pad-24);
+    s+='<rect x="'+x.toFixed(0)+'" y="'+(H-pad-h).toFixed(0)+'" width="'+bw.toFixed(0)+'" height="'+h.toFixed(0)+'" rx="4" fill="#1B365D"/>';
+    if(w.closed>0) s+='<text x="'+(x+bw/2).toFixed(0)+'" y="'+(H-pad-h-6).toFixed(0)+'" text-anchor="middle" font-size="12" font-weight="600" fill="#1B365D">'+w.closed+'</text>';
+    s+='<text x="'+(x+bw/2).toFixed(0)+'" y="'+(H-pad+16)+'" text-anchor="middle" font-size="10.5" fill="#6B7A8B">'+w.start.toLocaleDateString('nl-NL',{day:'numeric',month:'short'})+'</text>'; });
+  s+='</svg>'; el.innerHTML=s;
+}
+function drawChart(D){
+  const el=document.getElementById('chart'), W=1040,H=230,pad=44;
+  if(D.log.length<2){ el.innerHTML='<div class="empty">Grafiek verschijnt zodra er minstens twee updates zijn.</div>'; return; }
+  const cum=[]; let c=0; D.log.forEach(e=>{c+=e.hours; cum.push({d:parse(e.date),h:c});});
+  const t0=cum[0].d.getTime(), t1=cum[cum.length-1].d.getTime(), est=D.totalHoursEstimate;
+  const maxY=Math.max(est,cum[cum.length-1].h)*1.05;
+  const x=t=>pad+(t1===t0?0:(t-t0)/(t1-t0))*(W-pad-20), y=v=>H-pad-(v/maxY)*(H-pad-16);
+  let s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="230" font-family="Rubik,sans-serif">';
+  s+='<line x1="'+pad+'" y1="'+(H-pad)+'" x2="'+(W-20)+'" y2="'+(H-pad)+'" stroke="#D6DEE8"/>';
+  s+='<line x1="'+pad+'" y1="16" x2="'+pad+'" y2="'+(H-pad)+'" stroke="#D6DEE8"/>';
+  s+='<line x1="'+pad+'" y1="'+y(est)+'" x2="'+(W-20)+'" y2="'+y(est)+'" stroke="#B23A3A" stroke-width="1.5" stroke-dasharray="5 4"/>';
+  s+='<text x="'+(W-24)+'" y="'+(y(est)-6)+'" text-anchor="end" font-size="11" fill="#B23A3A">geschat '+est+' u</text>';
+  s+='<polyline points="'+cum.map(p=>x(p.d.getTime()).toFixed(0)+','+y(p.h).toFixed(0)).join(' ')+'" fill="none" stroke="#1B365D" stroke-width="3"/>';
+  cum.forEach(p=>{ s+='<circle cx="'+x(p.d.getTime()).toFixed(0)+'" cy="'+y(p.h).toFixed(0)+'" r="3.5" fill="#1B365D"/>'; });
+  [cum[0],cum[Math.floor(cum.length/2)],cum[cum.length-1]].forEach(p=>{ s+='<text x="'+x(p.d.getTime()).toFixed(0)+'" y="'+(H-pad+18)+'" text-anchor="middle" font-size="11" fill="#6B7A8B">'+p.d.toLocaleDateString('nl-NL',{day:'numeric',month:'short'})+'</text>'; });
+  s+='<text x="'+pad+'" y="12" font-size="11" fill="#6B7A8B">cumulatieve uren</text></svg>';
+  el.innerHTML=s;
+}
+
+document.getElementById('demoBtn').addEventListener('click',function(){
+  showingDemo=!showingDemo; this.classList.toggle('on',showingDemo);
+  document.getElementById('demobar').classList.toggle('show',showingDemo);
+  render(showingDemo?DEMO:DATA);
+});
+render(DATA);
+</script>
+</body>
+</html>
