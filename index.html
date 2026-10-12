@@ -142,11 +142,11 @@ const DATA = {
   totalHoursEstimate:1648, plannedEnd:"",
   costPerMln:3,   // € per miljoen tokens (indicatieve API-equivalent; pas aan naar je model/tarief)
   blocks:[
-    { name:"Fundament & kern",     ticketsTotal:17, hoursEst:624, ticketsDone:16, inProgress:1 },
-    { name:"Werkplaats",           ticketsTotal:11, hoursEst:492, ticketsDone:0, inProgress:0 },
-    { name:"Voorraad",             ticketsTotal:6,  hoursEst:204, ticketsDone:0, inProgress:0 },
-    { name:"Dashboards & inzicht", ticketsTotal:1,  hoursEst:64,  ticketsDone:0, inProgress:0 },
-    { name:"Data & oplevering",    ticketsTotal:6,  hoursEst:256, ticketsDone:0, inProgress:0 }
+    { name:"Fundament & kern",     ticketsTotal:17, hoursEst:111, ticketsDone:16, inProgress:1 },
+    { name:"Werkplaats",           ticketsTotal:11, hoursEst:150, ticketsDone:0, inProgress:0 },
+    { name:"Voorraad",             ticketsTotal:6,  hoursEst:60,  ticketsDone:0, inProgress:0 },
+    { name:"Dashboards & inzicht", ticketsTotal:1,  hoursEst:20,  ticketsDone:0, inProgress:0 },
+    { name:"Data & oplevering",    ticketsTotal:6,  hoursEst:130, ticketsDone:0, inProgress:0 }
   ],
   notes:[
     "VWE: kenteken-lookup vervallen (besluit 12-10; INT-02 uit de scope, totaal Fundament & kern nu 17). Vragen over adverteren via xmlMode/wsMedia gemaild op 12-10 (actiepunt #12); antwoord nodig vóór INT-03.",
@@ -156,6 +156,7 @@ const DATA = {
     "Back-up van bestanden (foto's) naar B2 regelen vóór de livegang (#8): Storage zit niet in de databaseback-ups.",
     "Wachtlabels (wacht op onderdelen/klant/uitbesteed werk, klaar voor proefrit) uitwerken bij VRK-03 en WPK-01; substatussen automatisch tonen in het voertuigoverzicht (KRN-05/VRK-01).",
     "Sluitingsdagen staan erin t/m 2027: jaarlijks aanvullen.",
+    "Uren herschat op 12-10: Fundament & kern kostte ±109 u t.o.v. 556 u geschat (±20%). Rest van Scope 1 herschat op ±360 u (bandbreedte 250–450 u): schermwerk ×0,3, data & oplevering ×0,5. Oorspronkelijke schatting was 1.028 u.",
     "Streefdatum vaststellen, zodat 'op schema' zichtbaar wordt."
   ],
   // log-regel: { date, hours, tokens, tickets } — 'tickets' = cumulatief afgerond aantal die dag (voor velocity)
