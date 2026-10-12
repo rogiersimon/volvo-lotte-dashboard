@@ -139,7 +139,7 @@ td{padding:9px 10px;border-bottom:1px solid var(--line);} td.r,th.r{text-align:r
 // (c) plannedEnd (streefdatum) en (d) notes. Claude Code kan dit dagelijks doen.
 const DATA = {
   project:"Volvo Lotte — Scope 1", updated:"2026-10-12",
-  totalHoursEstimate:471, plannedEnd:"",   // = som van hoursEst per blok (herschat 12-10-2026; oorspronkelijk 1648)
+  totalHoursEstimate:471, plannedEnd:"2026-12-15",   // = som van hoursEst per blok (herschat 12-10-2026; oorspronkelijk 1648)
   costPerMln:3,   // € per miljoen tokens (indicatieve API-equivalent; pas aan naar je model/tarief)
   blocks:[
     { name:"Fundament & kern",     ticketsTotal:17, hoursEst:111, ticketsDone:16, inProgress:1 },
@@ -157,7 +157,7 @@ const DATA = {
     "Wachtlabels (wacht op onderdelen/klant/uitbesteed werk, klaar voor proefrit) uitwerken bij VRK-03 en WPK-01; substatussen automatisch tonen in het voertuigoverzicht (KRN-05/VRK-01).",
     "Sluitingsdagen staan erin t/m 2027: jaarlijks aanvullen.",
     "Uren herschat op 12-10: Fundament & kern kostte ±109 u t.o.v. 556 u geschat (±20%). Rest van Scope 1 herschat op ±360 u (bandbreedte 250–450 u): schermwerk ×0,3, data & oplevering ×0,5. Oorspronkelijke schatting was 1.028 u.",
-    "Streefdatum vaststellen, zodat 'op schema' zichtbaar wordt."
+    "Streefdatum Scope 1: 15 december 2026 (vastgesteld 12-10)."
   ],
   // log-regel: { date, hours, tokens, tickets } — 'tickets' = cumulatief afgerond aantal die dag (voor velocity)
   log:[
