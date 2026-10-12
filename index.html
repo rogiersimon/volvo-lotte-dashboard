@@ -139,7 +139,7 @@ td{padding:9px 10px;border-bottom:1px solid var(--line);} td.r,th.r{text-align:r
 // (c) plannedEnd (streefdatum) en (d) notes. Claude Code kan dit dagelijks doen.
 const DATA = {
   project:"Volvo Lotte — Scope 1", updated:"2026-10-12",
-  totalHoursEstimate:1648, plannedEnd:"",
+  totalHoursEstimate:471, plannedEnd:"",   // = som van hoursEst per blok (herschat 12-10-2026; oorspronkelijk 1648)
   costPerMln:3,   // € per miljoen tokens (indicatieve API-equivalent; pas aan naar je model/tarief)
   blocks:[
     { name:"Fundament & kern",     ticketsTotal:17, hoursEst:111, ticketsDone:16, inProgress:1 },
@@ -219,9 +219,10 @@ function render(D){
   document.getElementById('tk').textContent=tDone;
   document.getElementById('tkSub').textContent='van '+tTot+' · '+tWip+' in uitvoering';
   const hSpent=D.log.reduce((s,e)=>s+(e.hours||0),0);
+  const est=D.blocks.reduce((s,b)=>s+(b.hoursEst||0),0)||D.totalHoursEstimate||0;   // totaal = som per blok
   document.getElementById('hr').textContent=fmtInt(hSpent);
-  const hpct=D.totalHoursEstimate?Math.round(hSpent/D.totalHoursEstimate*100):0;
-  document.getElementById('hrSub').textContent='van '+fmtInt(D.totalHoursEstimate)+' u geschat ('+hpct+'%)';
+  const hpct=est?Math.round(hSpent/est*100):0;
+  document.getElementById('hrSub').textContent='van '+fmtInt(est)+' u geschat ('+hpct+'%)';
   const tok=D.log.reduce((s,e)=>s+(e.tokens||0),0);
   document.getElementById('tok').textContent=fmtTok(tok);
   const cost=tok/1e6*(D.costPerMln||0);
@@ -242,7 +243,7 @@ function render(D){
   if(hSpent>0 && D.log.length>0){
     const first=parse(D.log[0].date), last=parse(D.log[D.log.length-1].date);
     const elapsed=Math.max(1,Math.round((last-first)/864e5)+1);
-    const perDay=hSpent/elapsed, remH=Math.max(0,D.totalHoursEstimate-hSpent);
+    const perDay=hSpent/elapsed, remH=Math.max(0,est-hSpent);
     const remDays=perDay>0?Math.ceil(remH/perDay):null;
     rate=perDay.toLocaleString('nl-NL',{maximumFractionDigits:1})+' u';
     rem=fmtInt(Math.round(remH))+' u · '+(remDays!==null?remDays+' d':'—');
@@ -276,7 +277,7 @@ function render(D){
   if(D.notes && D.notes.length){ nH.style.display=''; nC.style.display='';
     nu.innerHTML=D.notes.map(n=>'<li>'+n+'</li>').join(''); }
   else { nH.style.display='none'; nC.style.display='none'; }
-  drawChart(D);
+  drawChart(D,est);
   drawVelocity(D);
   // log
   const lg=document.getElementById('log');
@@ -287,7 +288,7 @@ function render(D){
     lg.innerHTML=h+'</table>'; }
   document.getElementById('foot').innerHTML='Bijwerken: per blok "gereed"/"in uitvoering", en dagelijks één logregel { datum, uren, tokens, tickets (cumulatief gereed) }; zet een streefdatum. '+
     'Tokenkosten zijn een indicatieve API-equivalent (op een abonnement inbegrepen), o.b.v. € '+(D.costPerMln||0)+'/mln tokens — aanpasbaar via "costPerMln" in het DATA-blok. '+
-    'Prognose is indicatief. · Volvo Lotte — Scope 1 (42 tickets, ~206 ontwikkeldagen).';
+    'Prognose is indicatief: resterende uren (som per blok min bestede uren) ÷ gemiddelde uren per kalenderdag. · Volvo Lotte — Scope 1 ('+tTot+' tickets, ~'+fmtInt(est)+' u; uren herschat 12-10-2026, oorspronkelijk 1.648 u).';
 }
 
 function weekStart(d){ const x=new Date(d); const day=(x.getDay()+6)%7; x.setDate(x.getDate()-day); x.setHours(0,0,0,0); return x; }
@@ -313,11 +314,11 @@ function drawVelocity(D){
     s+='<text x="'+(x+bw/2).toFixed(0)+'" y="'+(H-pad+16)+'" text-anchor="middle" font-size="10.5" fill="#6B7A8B">'+w.start.toLocaleDateString('nl-NL',{day:'numeric',month:'short'})+'</text>'; });
   s+='</svg>'; el.innerHTML=s;
 }
-function drawChart(D){
+function drawChart(D,estTotal){
   const el=document.getElementById('chart'), W=1040,H=230,pad=44;
   if(D.log.length<2){ el.innerHTML='<div class="empty">Grafiek verschijnt zodra er minstens twee updates zijn.</div>'; return; }
   const cum=[]; let c=0; D.log.forEach(e=>{c+=e.hours; cum.push({d:parse(e.date),h:c});});
-  const t0=cum[0].d.getTime(), t1=cum[cum.length-1].d.getTime(), est=D.totalHoursEstimate;
+  const t0=cum[0].d.getTime(), t1=cum[cum.length-1].d.getTime(), est=estTotal;
   const maxY=Math.max(est,cum[cum.length-1].h)*1.05;
   const x=t=>pad+(t1===t0?0:(t-t0)/(t1-t0))*(W-pad-20), y=v=>H-pad-(v/maxY)*(H-pad-16);
   let s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" height="230" font-family="Rubik,sans-serif">';
