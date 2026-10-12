@@ -138,18 +138,18 @@ td{padding:9px 10px;border-bottom:1px solid var(--line);} td.r,th.r{text-align:r
 // (a) ticketsDone/inProgress per blok, (b) log-regel {date,hours,tokens},
 // (c) plannedEnd (streefdatum) en (d) notes. Claude Code kan dit dagelijks doen.
 const DATA = {
-  project:"Volvo Lotte — Scope 1", updated:"2026-10-08",
+  project:"Volvo Lotte — Scope 1", updated:"2026-10-12",
   totalHoursEstimate:1648, plannedEnd:"",
   costPerMln:3,   // € per miljoen tokens (indicatieve API-equivalent; pas aan naar je model/tarief)
   blocks:[
-    { name:"Fundament & kern",     ticketsTotal:18, hoursEst:632, ticketsDone:14, inProgress:0 },
+    { name:"Fundament & kern",     ticketsTotal:17, hoursEst:624, ticketsDone:16, inProgress:1 },
     { name:"Werkplaats",           ticketsTotal:11, hoursEst:492, ticketsDone:0, inProgress:0 },
     { name:"Voorraad",             ticketsTotal:6,  hoursEst:204, ticketsDone:0, inProgress:0 },
     { name:"Dashboards & inzicht", ticketsTotal:1,  hoursEst:64,  ticketsDone:0, inProgress:0 },
     { name:"Data & oplevering",    ticketsTotal:6,  hoursEst:256, ticketsDone:0, inProgress:0 }
   ],
   notes:[
-    "VWE Interdata/XMLmode-toegang aanvragen op het account (heeft doorlooptijd).",
+    "VWE: kenteken-lookup vervallen (besluit 12-10; INT-02 uit de scope, totaal Fundament & kern nu 17). Vragen over adverteren via xmlMode/wsMedia gemaild op 12-10 (actiepunt #12); antwoord nodig vóór INT-03.",
     "Operationele actiepunten open: DPA's Appsmith (#1), Supabase (#3) en n8n (#7); voorwaarden GitHub/Hostnet (#4); back-upwachtwoord in de kluis (#5); Alain als ontvanger in UptimeRobot (#11, voor livegang). Zie docs/actiepunten.md.",
     "Vormgeving op mobiel (topbalk, pagina-indeling) en nieuwste Sessie.js op alle pagina's: in één visuele ronde aan het eind van de bouw (besluit 07-10).",
     "Uitnodigingen op prod pas afronden na FND-11 (de app praat nog met dev); Supabase-hersteltest na de livegang (#6).",
@@ -163,7 +163,8 @@ const DATA = {
     { date:"2026-09-30", hours:14, tokens:85227850, tickets:4 },
     { date:"2026-10-01", hours:16, tokens:88511618, tickets:8 },
     { date:"2026-10-06", hours:22, tokens:70880009, tickets:11 },
-    { date:"2026-10-08", hours:19, tokens:113356422, tickets:14 }
+    { date:"2026-10-08", hours:19, tokens:113356422, tickets:14 },
+    { date:"2026-10-12", hours:38, tokens:29048427, tickets:16 }
   ]
 };
 // ================= VOORBEELDDATA (illustratie) =================
