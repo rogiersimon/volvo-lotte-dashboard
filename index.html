@@ -138,18 +138,18 @@ td{padding:9px 10px;border-bottom:1px solid var(--line);} td.r,th.r{text-align:r
 // (a) ticketsDone/inProgress per blok, (b) log-regel {date,hours,tokens},
 // (c) plannedEnd (streefdatum) en (d) notes. Claude Code kan dit dagelijks doen.
 const DATA = {
-  project:"Volvo Lotte — Scope 1", updated:"2026-10-12",
+  project:"Volvo Lotte — Scope 1", updated:"2026-10-13",
   totalHoursEstimate:471, plannedEnd:"2026-12-15",   // = som van hoursEst per blok (herschat 12-10-2026; oorspronkelijk 1648)
   costPerMln:3,   // € per miljoen tokens (indicatieve API-equivalent; pas aan naar je model/tarief)
   blocks:[
-    { name:"Fundament & kern",     ticketsTotal:17, hoursEst:111, ticketsDone:16, inProgress:1 },
-    { name:"Werkplaats",           ticketsTotal:11, hoursEst:150, ticketsDone:0, inProgress:0 },
+    { name:"Fundament & kern",     ticketsTotal:17, hoursEst:111, ticketsDone:17, inProgress:0 },
+    { name:"Werkplaats",           ticketsTotal:11, hoursEst:150, ticketsDone:1, inProgress:1 },
     { name:"Voorraad",             ticketsTotal:6,  hoursEst:60,  ticketsDone:0, inProgress:0 },
     { name:"Dashboards & inzicht", ticketsTotal:1,  hoursEst:20,  ticketsDone:0, inProgress:0 },
     { name:"Data & oplevering",    ticketsTotal:6,  hoursEst:130, ticketsDone:0, inProgress:0 }
   ],
   notes:[
-    "VWE: kenteken-lookup vervallen (besluit 12-10; INT-02 uit de scope, totaal Fundament & kern nu 17). Vragen over adverteren via xmlMode/wsMedia gemaild op 12-10 (actiepunt #12); antwoord nodig vóór INT-03.",
+    "VWE: INT-01 afgerond (13-10). Geen kenteken-lookup (INT-02 vervalt); XML-koppeling actief in Optimaal; adverteren via wsMedia zonder Easykey; statistieken handmatig. Bij start INT-03: xmlMode-inloggegevens en DPA regelen (actiepunt #12). WPK-03 (uurtarief) afgedaan via OVK-06.",
     "Operationele actiepunten open: DPA's Appsmith (#1), Supabase (#3) en n8n (#7); voorwaarden GitHub/Hostnet (#4); back-upwachtwoord in de kluis (#5); Alain als ontvanger in UptimeRobot (#11, voor livegang). Zie docs/actiepunten.md.",
     "Vormgeving op mobiel (topbalk, pagina-indeling) en nieuwste Sessie.js op alle pagina's: in één visuele ronde aan het eind van de bouw (besluit 07-10).",
     "Uitnodigingen op prod pas afronden na FND-11 (de app praat nog met dev); Supabase-hersteltest na de livegang (#6).",
