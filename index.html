@@ -143,7 +143,7 @@ const DATA = {
   costPerMln:3,   // € per miljoen tokens (indicatieve API-equivalent; pas aan naar je model/tarief)
   blocks:[
     { name:"Fundament & kern",     ticketsTotal:17, hoursEst:111, ticketsDone:17, inProgress:0 },
-    { name:"Werkplaats",           ticketsTotal:11, hoursEst:150, ticketsDone:2, inProgress:0 },
+    { name:"Werkplaats",           ticketsTotal:11, hoursEst:150, ticketsDone:4, inProgress:0 },
     { name:"Voorraad",             ticketsTotal:6,  hoursEst:60,  ticketsDone:0, inProgress:0 },
     { name:"Dashboards & inzicht", ticketsTotal:1,  hoursEst:20,  ticketsDone:0, inProgress:0 },
     { name:"Data & oplevering",    ticketsTotal:6,  hoursEst:130, ticketsDone:0, inProgress:0 }
@@ -157,6 +157,7 @@ const DATA = {
     "Wachtlabels (wacht op onderdelen/klant/uitbesteed werk, klaar voor proefrit) uitwerken bij VRK-03 en WPK-01; substatussen automatisch tonen in het voertuigoverzicht (KRN-05/VRK-01).",
     "Sluitingsdagen staan erin t/m 2027: jaarlijks aanvullen.",
     "Uren herschat op 12-10: Fundament & kern kostte ±109 u t.o.v. 556 u geschat (±20%). Rest van Scope 1 herschat op ±360 u (bandbreedte 250–450 u): schermwerk ×0,3, data & oplevering ×0,5. Oorspronkelijke schatting was 1.028 u.",
+    "Planning (WPK-12): gating op onderdelen werkt nu op de status 'wachten op onderdelen'; bij WPK-07 omzetten naar de verwachte leverdatum.",
     "Streefdatum Scope 1: 15 december 2026 (vastgesteld 12-10)."
   ],
   // log-regel: { date, hours, tokens, tickets } — 'tickets' = cumulatief afgerond aantal die dag (voor velocity)
@@ -167,7 +168,8 @@ const DATA = {
     { date:"2026-10-08", hours:19, tokens:113356422, tickets:14 },
     { date:"2026-10-12", hours:38, tokens:29048427, tickets:16 },
     { date:"2026-10-13", hours:11, tokens:17884489, tickets:18 },
-    { date:"2026-10-14", hours:7, tokens:15443710, tickets:19 }
+    { date:"2026-10-14", hours:7, tokens:15443710, tickets:19 },
+    { date:"2026-10-15", hours:11, tokens:40106652, tickets:21 }
   ]
 };
 // ================= VOORBEELDDATA (illustratie) =================
