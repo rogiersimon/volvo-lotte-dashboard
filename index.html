@@ -138,12 +138,12 @@ td{padding:9px 10px;border-bottom:1px solid var(--line);} td.r,th.r{text-align:r
 // (a) ticketsDone/inProgress per blok, (b) log-regel {date,hours,tokens},
 // (c) plannedEnd (streefdatum) en (d) notes. Claude Code kan dit dagelijks doen.
 const DATA = {
-  project:"Volvo Lotte — Scope 1", updated:"2026-10-13",
+  project:"Volvo Lotte — Scope 1", updated:"2026-10-15",
   totalHoursEstimate:471, plannedEnd:"2026-12-15",   // = som van hoursEst per blok (herschat 12-10-2026; oorspronkelijk 1648)
   costPerMln:3,   // € per miljoen tokens (indicatieve API-equivalent; pas aan naar je model/tarief)
   blocks:[
     { name:"Fundament & kern",     ticketsTotal:17, hoursEst:111, ticketsDone:17, inProgress:0 },
-    { name:"Werkplaats",           ticketsTotal:11, hoursEst:150, ticketsDone:1, inProgress:1 },
+    { name:"Werkplaats",           ticketsTotal:11, hoursEst:150, ticketsDone:2, inProgress:0 },
     { name:"Voorraad",             ticketsTotal:6,  hoursEst:60,  ticketsDone:0, inProgress:0 },
     { name:"Dashboards & inzicht", ticketsTotal:1,  hoursEst:20,  ticketsDone:0, inProgress:0 },
     { name:"Data & oplevering",    ticketsTotal:6,  hoursEst:130, ticketsDone:0, inProgress:0 }
@@ -165,7 +165,9 @@ const DATA = {
     { date:"2026-10-01", hours:16, tokens:88511618, tickets:8 },
     { date:"2026-10-06", hours:22, tokens:70880009, tickets:11 },
     { date:"2026-10-08", hours:19, tokens:113356422, tickets:14 },
-    { date:"2026-10-12", hours:38, tokens:29048427, tickets:16 }
+    { date:"2026-10-12", hours:38, tokens:29048427, tickets:16 },
+    { date:"2026-10-13", hours:11, tokens:17884489, tickets:18 },
+    { date:"2026-10-14", hours:7, tokens:15443710, tickets:19 }
   ]
 };
 // ================= VOORBEELDDATA (illustratie) =================
