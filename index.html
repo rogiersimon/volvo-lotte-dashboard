@@ -138,12 +138,12 @@ td{padding:9px 10px;border-bottom:1px solid var(--line);} td.r,th.r{text-align:r
 // (a) ticketsDone/inProgress per blok, (b) log-regel {date,hours,tokens},
 // (c) plannedEnd (streefdatum) en (d) notes. Claude Code kan dit dagelijks doen.
 const DATA = {
-  project:"Volvo Lotte — Scope 1", updated:"2026-10-20",
+  project:"Volvo Lotte — Scope 1", updated:"2026-10-27",
   totalHoursEstimate:471, plannedEnd:"2026-12-15",   // = som van hoursEst per blok (herschat 12-10-2026; oorspronkelijk 1648)
   costPerMln:3,   // € per miljoen tokens (indicatieve API-equivalent; pas aan naar je model/tarief)
   blocks:[
     { name:"Fundament & kern",     ticketsTotal:17, hoursEst:111, ticketsDone:17, inProgress:0 },
-    { name:"Werkplaats",           ticketsTotal:12, hoursEst:156, ticketsDone:6, inProgress:1 },
+    { name:"Werkplaats",           ticketsTotal:12, hoursEst:156, ticketsDone:8, inProgress:0 },
     { name:"Voorraad",             ticketsTotal:6,  hoursEst:60,  ticketsDone:0, inProgress:0 },
     { name:"Dashboards & inzicht", ticketsTotal:1,  hoursEst:20,  ticketsDone:0, inProgress:0 },
     { name:"Data & oplevering",    ticketsTotal:6,  hoursEst:130, ticketsDone:0, inProgress:0 }
@@ -158,6 +158,8 @@ const DATA = {
     "Sluitingsdagen staan erin t/m 2027: jaarlijks aanvullen.",
     "Uren herschat op 12-10: Fundament & kern kostte ±109 u t.o.v. 556 u geschat (±20%). Rest van Scope 1 herschat op ±360 u (bandbreedte 250–450 u): schermwerk ×0,3, data & oplevering ×0,5. Oorspronkelijke schatting was 1.028 u.",
     "Planning: onderdelen blokkeren de planning niet (werk kan al starten); de planning toont de onderdelenstatus en verwachte levering (WPK-07, besluit 20-10). Nieuw ticket 'Pakbon-controle (handmatig)' na WPK-07 toegevoegd aan Werkplaats (±6 u).",
+    "Pakbon-controle (WPK-15) afgerond: de monteur controleert pakbonnen bij binnenkomst. Nieuw idee buiten Scope 1: INT-09 leveranciers-artikelen en prijzen (Skandix, Nordicar) — eerst navragen of er een prijslijst/feed is.",
+    "Dev-project wordt dagelijks wakker gehouden via GitHub (pauzeerde op 27-10 na een week zonder werk).",
     "Streefdatum Scope 1: 15 december 2026 (vastgesteld 12-10)."
   ],
   // log-regel: { date, hours, tokens, tickets } — 'tickets' = cumulatief afgerond aantal die dag (voor velocity)
@@ -174,7 +176,12 @@ const DATA = {
     { date:"2026-10-17", hours:2, tokens:0, tickets:21 },
     { date:"2026-10-18", hours:1, tokens:0, tickets:21 },
     { date:"2026-10-19", hours:8, tokens:0, tickets:21 },
-    { date:"2026-10-20", hours:10, tokens:22308847, tickets:23 }
+    { date:"2026-10-20", hours:10, tokens:22308847, tickets:23 },
+    { date:"2026-10-21", hours:6, tokens:1385234, tickets:23 },
+    { date:"2026-10-22", hours:11, tokens:0, tickets:23 },
+    { date:"2026-10-23", hours:4, tokens:0, tickets:23 },
+    { date:"2026-10-26", hours:5, tokens:0, tickets:23 },
+    { date:"2026-10-27", hours:8, tokens:43159598, tickets:25 }
   ]
 };
 // ================= VOORBEELDDATA (illustratie) =================
